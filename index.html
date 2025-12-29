@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GlowCut — Crop + Remove Background</title>
+  <title>GlowCut</title>
 
-  <!-- CropperJS -->
+  <!-- CropperJS (UMD) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css">
 
   <link rel="stylesheet" href="./style.css" />
@@ -18,38 +18,32 @@
       <div class="logo"></div>
       <div>
         <div class="title">GlowCut</div>
-        <div class="sub">Crop images • Remove background • Export PNG</div>
+        <div class="sub">Crop • Remove background • Export PNG</div>
       </div>
     </div>
-
-    <a class="chip" href="https://github.com/" target="_blank" rel="noreferrer">
-      GitHub Pages Ready
-    </a>
+    <div class="pill">GitHub Pages (client-side)</div>
   </header>
 
   <main class="wrap">
     <section class="panel">
-      <div class="panel-title">1) Upload</div>
-
+      <div class="panel-title">Upload</div>
       <div class="row">
         <label class="btn primary">
           <input id="file" type="file" accept="image/*" hidden />
           Choose image
         </label>
-
-        <button id="btnFit" class="btn" disabled>Fit</button>
-        <button id="btnReset" class="btn" disabled>Reset</button>
+        <button id="fit" class="btn" disabled>Fit</button>
+        <button id="reset" class="btn" disabled>Reset</button>
       </div>
 
-      <div class="hint">Tip: Drag to move, scroll to zoom, corners to resize crop.</div>
+      <div class="hint">Drag to move, scroll to zoom, corners to resize crop.</div>
 
-      <div class="stage">
-        <div class="stage-glow"></div>
-        <img id="image" alt="Upload to start" />
+      <div class="stage" id="stage">
+        <div class="stageGlow"></div>
+        <img id="image" alt="" />
       </div>
 
-      <div class="panel-title">2) Crop options</div>
-
+      <div class="panel-title">Aspect ratio</div>
       <div class="grid">
         <button class="btn" data-aspect="free" disabled>Free</button>
         <button class="btn" data-aspect="1" disabled>1:1</button>
@@ -57,18 +51,15 @@
         <button class="btn" data-aspect="0.8" disabled>4:5</button>
       </div>
 
-      <div class="panel-title">3) Actions</div>
-
+      <div class="panel-title">Actions</div>
       <div class="row">
-        <button id="btnCrop" class="btn primary" disabled>Crop</button>
-        <button id="btnRemoveBg" class="btn magic" disabled>
-          Remove background
-        </button>
+        <button id="crop" class="btn primary" disabled>Crop</button>
+        <button id="rmbg" class="btn magic" disabled>Remove background</button>
       </div>
 
       <div class="row">
-        <button id="btnDownload" class="btn success" disabled>Download PNG</button>
-        <button id="btnClear" class="btn danger" disabled>Clear</button>
+        <button id="download" class="btn success" disabled>Download PNG</button>
+        <button id="clear" class="btn danger" disabled>Clear</button>
       </div>
 
       <div class="status" id="status">Waiting for image.</div>
@@ -76,39 +67,35 @@
 
     <section class="panel">
       <div class="panel-title">Preview</div>
-
-      <div class="preview-wrap">
+      <div class="preview">
         <div class="checker"></div>
-        <img id="preview" />
+        <img id="preview" alt="" />
       </div>
 
-      <div class="panel-title">Export settings</div>
-
+      <div class="panel-title">Style</div>
       <div class="controls">
         <div class="control">
           <label>Padding</label>
-          <input id="pad" type="range" min="0" max="80" value="0" />
+          <input id="pad" type="range" min="0" max="120" value="0" />
         </div>
         <div class="control">
           <label>Shadow</label>
-          <input id="shadow" type="range" min="0" max="60" value="18" />
+          <input id="shadow" type="range" min="0" max="80" value="18" />
         </div>
         <div class="control">
           <label>Glow</label>
-          <input id="glow" type="range" min="0" max="80" value="24" />
+          <input id="glow" type="range" min="0" max="120" value="28" />
         </div>
       </div>
 
-      <div class="hint">
-        Export is always PNG. Background removal yields transparency.
-      </div>
+      <div class="hint">Tip: background removal exports transparent PNG.</div>
     </section>
   </main>
 
-  <!-- CropperJS -->
+  <!-- CropperJS (UMD global: Cropper) -->
   <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
 
-  <!-- Your app -->
+  <!-- App (module required for background-removal ESM import) -->
   <script type="module" src="./app.js"></script>
 </body>
 </html>
