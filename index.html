@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GlowCut — Crop + Remove Background</title>
+
+  <!-- CropperJS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css">
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <div class="title">GlowCut</div>
+        <div class="sub">Crop images • Remove background • Export PNG</div>
+      </div>
+    </div>
+
+    <a class="chip" href="https://github.com/" target="_blank" rel="noreferrer">
+      GitHub Pages Ready
+    </a>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <div class="panel-title">1) Upload</div>
+
+      <div class="row">
+        <label class="btn primary">
+          <input id="file" type="file" accept="image/*" hidden />
+          Choose image
+        </label>
+
+        <button id="btnFit" class="btn" disabled>Fit</button>
+        <button id="btnReset" class="btn" disabled>Reset</button>
+      </div>
+
+      <div class="hint">Tip: Drag to move, scroll to zoom, corners to resize crop.</div>
+
+      <div class="stage">
+        <div class="stage-glow"></div>
+        <img id="image" alt="Upload to start" />
+      </div>
+
+      <div class="panel-title">2) Crop options</div>
+
+      <div class="grid">
+        <button class="btn" data-aspect="free" disabled>Free</button>
+        <button class="btn" data-aspect="1" disabled>1:1</button>
+        <button class="btn" data-aspect="1.7777777778" disabled>16:9</button>
+        <button class="btn" data-aspect="0.8" disabled>4:5</button>
+      </div>
+
+      <div class="panel-title">3) Actions</div>
+
+      <div class="row">
+        <button id="btnCrop" class="btn primary" disabled>Crop</button>
+        <button id="btnRemoveBg" class="btn magic" disabled>
+          Remove background
+        </button>
+      </div>
+
+      <div class="row">
+        <button id="btnDownload" class="btn success" disabled>Download PNG</button>
+        <button id="btnClear" class="btn danger" disabled>Clear</button>
+      </div>
+
+      <div class="status" id="status">Waiting for image.</div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">Preview</div>
+
+      <div class="preview-wrap">
+        <div class="checker"></div>
+        <img id="preview" />
+      </div>
+
+      <div class="panel-title">Export settings</div>
+
+      <div class="controls">
+        <div class="control">
+          <label>Padding</label>
+          <input id="pad" type="range" min="0" max="80" value="0" />
+        </div>
+        <div class="control">
+          <label>Shadow</label>
+          <input id="shadow" type="range" min="0" max="60" value="18" />
+        </div>
+        <div class="control">
+          <label>Glow</label>
+          <input id="glow" type="range" min="0" max="80" value="24" />
+        </div>
+      </div>
+
+      <div class="hint">
+        Export is always PNG. Background removal yields transparency.
+      </div>
+    </section>
+  </main>
+
+  <!-- CropperJS -->
+  <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
+
+  <!-- Your app -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
